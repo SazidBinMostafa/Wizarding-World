@@ -20,16 +20,40 @@ const TriangleBar = (props) => {
 
 
 function PagesToRead() {
-    const allBooks = [];
+    const [allBooks, setAllBooks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+    const [loaderState, setLoaderState] = useState(false)
+
     const [readBooks, setReadBooks] = useState([]);
     const [data, setData] = useState([]);
 
     const readListBooksId = getStoredReadList();
 
+    useEffect(()=>{
+        const loadBooks = async () => {
+            try{
+                const loadedBooks = await fetch('https://raw.githubusercontent.com/SazidBinMostafa/Wizarding-World-Resources/main/data.json');
+            const data = await loadedBooks.json();
+            setAllBooks(data)
+            setLoading(false)
+            }
+            catch(error){console.log(error)}
+        }
+
+        
+        loadBooks()
+    },[])
+    
     useEffect(() => {
-        const newReadBooks = readListBooksId.map(readBookId => allBooks.find(book => readBookId == book.bookId))
+        if(!loading){
+            const newReadBooks = readListBooksId.map(readBookId => allBooks.find(book => readBookId == book.bookId))
         setReadBooks(newReadBooks);
 
+        }
+    }, [loading, allBooks])
+
+    useEffect(()=>{
         const newData = [];
         for (const book of readBooks) {
             const bookData = {
@@ -39,8 +63,15 @@ function PagesToRead() {
             newData.push(bookData);
         }
         setData(newData);
+        setLoaderState(true)
+        
+    },[readBooks])
 
-    }, [readBooks])
+    if (loading) {
+        return <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-dots loading-lg"></span>
+        </div>
+    }
     
     return <div className="w-full">
         <BarChart
