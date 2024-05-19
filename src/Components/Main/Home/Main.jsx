@@ -6,11 +6,15 @@ function Main(){
 
     const [books, setBooks] = useState([]);
 
+    const loadBooks = async () => {
+        const loadedBooks = await axios.get('https://raw.githubusercontent.com/SazidBinMostafa/Wizarding-World-Resources/main/data.json');
+        await setBooks(loadedBooks.data)
+    }
+
     useEffect(()=>{
-        axios.get('data.json')
-        .then(data => setBooks(data.data))
+        loadBooks();
     },[])
-    
+
     return <main className="mx-5 lg:mx-32">
         <div className="relative">
             <img src="https://harrypottershop.co.uk/cdn/shop/collections/books_hero_2048x.jpg?v=1620745683" alt="" />
