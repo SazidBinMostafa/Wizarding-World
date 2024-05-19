@@ -15,8 +15,9 @@ function Book() {
     const [loading, setLoading] = useState(true);
 
     const loadBooks = async () => {
-        const loadedBooks = await axios.get('https://raw.githubusercontent.com/SazidBinMostafa/Wizarding-World-Resources/main/data.json');
-        await setBooks(loadedBooks.data)
+        const loadedBooks = await fetch('https://raw.githubusercontent.com/SazidBinMostafa/Wizarding-World-Resources/main/data.json');
+        const data = await loadedBooks.json();
+        setBooks(data)
         setLoading(false)
     }
 
@@ -24,12 +25,12 @@ function Book() {
         loadBooks();
     },[])
 
+    console.log(books)
     if(loading){
         return <div className="flex items-center justify-center h-screen">
             <span className="loading loading-dots loading-lg"></span>
         </div>
     }
-    console.log(books)
 
     const book = books.find(book => book.bookId == id);
     const { bookId, bookName, author, image, category, rating, tags, about, totalPages, publisher, yearOfPublishing, } = book;

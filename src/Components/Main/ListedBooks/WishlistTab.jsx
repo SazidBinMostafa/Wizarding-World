@@ -1,30 +1,40 @@
 import { useEffect, useState } from "react";
 import AddedBookCard from "./AddedBookCard";
 import { getStoredWishList } from "../../../Utilities/Utilities";
-import axios from "axios";
 
 function WishlistTab() {
-    // const [allBooks, setAllBooks] = useState([]);
+    const [allBooks, setAllBooks] = useState([]);
+    const [wishedBooksId, setWishedBooksId] = useState([]);
+    const [wishedBooks, setWishedBooks] = useState([]);
+    const parent = 'Wishlist';
+    const [loading, setLoading] = useState(true);
+    const wishListBooksId = getStoredWishList();
 
-    // useEffect(()=>{
-    //     axios.get('data.json')
-    //     .then(data => setAllBooks(data.data))
-    // },[])
+    const loadBooks = async () => {
+        const loadedBooks = await fetch('https://raw.githubusercontent.com/SazidBinMostafa/Wizarding-World-Resources/main/data.json');
+        const data = await loadedBooks.json();
+        setAllBooks(data)
+        setLoading(false)
+    }
 
-    // const [wishlist, setWishlist] = useState([]);
-    // const parent = 'Wishlist';
+    useEffect(() => {
+        loadBooks();
+        if (allBooks.length > 0 && wishListBooksId) {
+            const newReadBooks = wishListBooksId.map(readBookId => allBooks.find(book => readBookId == book.bookId))
+            setWishedBooks(newReadBooks)
 
-    // const wishlistBooksId = getStoredWishList();
+        }
+    }, [loading, wishedBooksId])
 
-    // useEffect(() => {
-    //     const newWishlist = wishlistBooksId.map(wishBookId=> allBooks.find(book=> wishBookId == book.bookId))
-    //     setWishlist(newWishlist)
-    // },[])
+    if (loading) {
+        return <div className="flex items-center justify-center h-screen">
+            <span className="loading loading-dots loading-lg"></span>
+        </div>
+    }
 
-
-    // return <section className="grid gap-8">
-    //     {wishlist.map(book => <AddedBookCard key={book.id} book={book} parent={parent} setWishlist={setWishlist}></AddedBookCard>)}
-    // </section>
+    return <section className="grid gap-8">
+        {wishedBooks.map(book => <AddedBookCard key={book.id} book={book} parent={parent} setWishedBooksId={setWishedBooksId}></AddedBookCard>)}
+    </section>
 }
 
 export default WishlistTab;

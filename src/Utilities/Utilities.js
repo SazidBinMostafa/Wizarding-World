@@ -40,22 +40,22 @@ const setStoredWishList = (id) => {
         localStorage.setItem('Wishlist', JSON.stringify(newStoredWishList));
     }
 }
-const removeFromReadList = ({bookId, setReadBooks}) => {
+const removeFromReadList = ({bookId, setReadBooksId}) => {
     const storedReadList = getStoredReadList();
     const newStoredReadList = storedReadList.filter(id => bookId != id);
 
     if(storedReadList.includes(bookId)){
         localStorage.setItem('Readlist', JSON.stringify(newStoredReadList));
-        setReadBooks(newStoredReadList)
+        setReadBooksId(newStoredReadList)
     }
 }
 
-const removeFromWishList = ({bookId, setWishlist}) => {
+const removeFromWishList = ({bookId, setWishedBooksId}) => {
     const storedWishList = getStoredWishList();
     const newStoredWishList = storedWishList.filter(id => bookId != id);
     if(storedWishList.includes(bookId)){
         localStorage.setItem('Wishlist', JSON.stringify(newStoredWishList));
-        setWishlist(newStoredWishList)
+        setWishedBooksId(newStoredWishList)
     }
 }
 export { getStoredReadList, setStoredReadList, getStoredWishList, setStoredWishList, removeFromReadList, removeFromWishList}

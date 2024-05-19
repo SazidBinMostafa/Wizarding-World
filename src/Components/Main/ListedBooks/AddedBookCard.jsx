@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import { removeFromReadList, removeFromWishList } from '../../../Utilities/Utilities';
 
 
-function AddedBookCard({ book, parent, setReadBooks, setWishlist }) {
+function AddedBookCard({ book, parent, setReadBooksId, setWishedBooksId}) {
     const { bookId, bookName, author, image, category, rating, tags, about, totalPages, publisher, yearOfPublishing, } = book;
     
     const handleRemove = () =>{
-        if(parent === 'Readlist'){
-            removeFromReadList({bookId, setReadBooks})
-        }
-        else if(parent === 'Wishlist'){
-            removeFromWishList({bookId, setWishlist})
+        if(book){
+            if(parent === 'Readlist'){
+                removeFromReadList({bookId, setReadBooksId})
+            }
+            else if(parent === 'Wishlist'){
+                removeFromWishList({bookId, setWishedBooksId})
+            }
         }
     }
+    console.log(book)
     return <>
         <div className="card lg:card-side bg-base-100 shadow-xl">
             <figure className="p-5"><img className="w-40" src={image} alt="Album" /></figure>
@@ -22,7 +25,7 @@ function AddedBookCard({ book, parent, setReadBooks, setWishlist }) {
                 <p>By: {author}</p>
                 <div className="flex gap-3 items-center">
                     <h3 className='text-xl'>Tag:</h3>
-                    {tags.map((tag, idx) => <div key={idx} className="badge badge-accent badge-outline">#{tag}</div>)}
+                    {tags && tags.map((tag, idx) => <div key={idx} className="badge badge-accent badge-outline">#{tag}</div>)}
                 </div>
                 <div className="lg:flex">
                     <p className="flex items-center gap-1"><span className="material-symbols-outlined">today</span>Year of Publishing: {yearOfPublishing} </p>
