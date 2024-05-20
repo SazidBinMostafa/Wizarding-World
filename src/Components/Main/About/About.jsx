@@ -7,7 +7,7 @@ function About(){
         </div>
 
         <div className="text-center border rounded p-8 mt-8">
-                <h3 className="text-xl">The Harry Potter Shop is the official online shop for all your wizarding books. Studio Tour London, the Harry Potter shop at Platform 9 ¾ and Harry Potter New York providing a spellbinding shopping experience.
+                <h3 className="text-xl">The Wizarding World Shop is the official online shop for all your wizarding books. Studio Tour London, the Harry Potter shop at Platform 9 ¾ and Harry Potter New York providing a spellbinding shopping experience.
 
                     Discover everything from fan-favourites and brand collaborations to exclusive designs and one-of-a-kind personalisation in the largest collection of Harry Potter and Fantastic Beasts products in the world. With over 1000 items, every fan will find something magical to add to their collection.
 
