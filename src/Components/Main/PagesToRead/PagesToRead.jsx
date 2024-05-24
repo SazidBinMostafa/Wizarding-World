@@ -73,6 +73,7 @@ function PagesToRead() {
     }
     
     return <div className="w-full" >
+        <h1 className="text-3xl lg:text-5xl font-bold text-center my-5">Pages to Read</h1>
         <ResponsiveContainer width="100%" height={800} >
         <BarChart
             data={data}
