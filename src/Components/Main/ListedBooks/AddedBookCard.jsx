@@ -4,7 +4,7 @@ import { removeFromReadList, removeFromWishList } from '../../../Utilities/Utili
 
 
 function AddedBookCard({ book, parent, setReadBooksId, setWishedBooksId}) {
-    const { bookId, bookName, author, image, category, rating, tags, about, totalPages, publisher, yearOfPublishing, } = book;
+    const { bookId, bookName, author, image, category, rating, tags, totalPages, publisher, yearOfPublishing, } = book;
     
     const handleRemove = () =>{
         if(book){
@@ -16,15 +16,16 @@ function AddedBookCard({ book, parent, setReadBooksId, setWishedBooksId}) {
             }
         }
     }
-    console.log(book)
+
     return <>
-        <div className="card lg:card-side bg-base-100 shadow-xl">
+        <div className="card border lg:card-side bg-base-100 shadow-xl">
             <figure className="p-5"><img className="w-40" src={image} alt="Album" /></figure>
             <div className="card-body">
                 <h1 className="card-title text-3xl">{bookName}</h1>
                 <p>By: {author}</p>
                 <div className="flex gap-3 items-center">
                     <h3 className='text-xl'>Tag:</h3>
+
                     {tags && tags.map((tag, idx) => <div key={idx} className="badge badge-accent badge-outline">#{tag}</div>)}
                 </div>
                 <div className="lg:flex">
@@ -56,6 +57,9 @@ AddedBookCard.propTypes = {
     image: PropTypes.string,
     category: PropTypes.string,
     rating: PropTypes.number,
-    tags: PropTypes.array
+    tags: PropTypes.array,
+    parent: PropTypes.string,
+    setReadBooksId: PropTypes.func,
+    setWishedBooksId: PropTypes.func,
 }
 export default AddedBookCard;
