@@ -1,6 +1,7 @@
-import { Bar, BarChart, CartesianGrid, Cell, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { getStoredReadList } from "../../../Utilities/Utilities";
+import PropTypes from 'prop-types';
 
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink', 'Fuchsia'];
@@ -23,7 +24,6 @@ function PagesToRead() {
     const [allBooks, setAllBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     
-    const [loaderState, setLoaderState] = useState(false)
 
     const [readBooks, setReadBooks] = useState([]);
     const [data, setData] = useState([]);
@@ -63,7 +63,6 @@ function PagesToRead() {
             newData.push(bookData);
         }
         setData(newData);
-        setLoaderState(true)
         
     },[readBooks])
 
@@ -73,10 +72,9 @@ function PagesToRead() {
         </div>
     }
     
-    return <div className="w-full">
+    return <div className="w-full" >
+        <ResponsiveContainer width="100%" height={800} >
         <BarChart
-            width={1250}
-            height={500}
             data={data}
             margin={{
                 top: 20,
@@ -84,9 +82,10 @@ function PagesToRead() {
                 left: 20,
                 bottom: 5,
             }}
+            
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name"  angle={-90} height={300} textAnchor="end" interval={0}/>
             <YAxis />
             <Tooltip />
             <Bar dataKey="Pages" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
@@ -95,7 +94,19 @@ function PagesToRead() {
                 ))}
             </Bar>
         </BarChart>
+        </ResponsiveContainer>
     </div>
 }
 
 export default PagesToRead;
+
+
+TriangleBar.propTypes = {
+    fill: PropTypes.string,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    
+
+}
