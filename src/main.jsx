@@ -12,11 +12,13 @@ import PagesToRead from "./Components/Main/PagesToRead/PagesToRead";
 import About from "./Components/Main/About/About";
 import ContactUs from "./Components/Main/ContactUs/ContactUs";
 import Book from "./Components/Main/Book/Book";
+import Page404 from "./Components/404/Page404";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <Page404></Page404>,
     children: [
       { 
         path: '/',

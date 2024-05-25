@@ -10,7 +10,7 @@ function ListedBooks() {
         setSortBy(event.target.value)
     }
 
-    return <section className="mx-5 lg:mx-32">
+    return <section className="mx-5 lg:mx-32 mb-14">
         <div className="w-full py-8 flex justify-center items-center"><h1 className="text-5xl font-bold">Books</h1></div>
         <div className="flex w-full justify-end">
             <div className="mb-8">

@@ -1,5 +1,5 @@
 function About(){
-    return <>
+    return <section className="mb-14">
     <div className="px-5 lg:px-32 flex flex-col justify-center">
         <div className="relative text-center">
             <img src="https://harrypottershop.co.uk/cdn/shop/files/Diagon_Alley_2048x.jpg?v=1614328778" alt="" />
@@ -14,7 +14,7 @@ function About(){
                     Stay up to date on all the latest Harry Potter Shop news as well as new and exclusive product launches by signing up to our newsletter!</h3>
             </div>
     </div>
-    </>
+    </section>
 }
 
 export default About;
